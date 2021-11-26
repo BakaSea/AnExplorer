@@ -385,6 +385,9 @@ public class StandaloneActivity extends BaseActivity {
         } else if (id == R.id.menu_sort_size) {
             setUserSortOrder(State.SORT_ORDER_SIZE);
             return true;
+        } else if (id == R.id.menu_sort_type) {
+            setUserSortOrder(State.SORT_ORDER_TYPE);
+            return true;
         } else if (id == R.id.menu_grid) {
             setUserMode(State.MODE_GRID);
             return true;

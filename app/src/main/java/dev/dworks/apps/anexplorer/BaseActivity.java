@@ -145,6 +145,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         public static final int SORT_ORDER_DISPLAY_NAME = 1;
         public static final int SORT_ORDER_LAST_MODIFIED = 2;
         public static final int SORT_ORDER_SIZE = 3;
+        public static final int SORT_ORDER_TYPE = 4;
 
         @Override
         public int describeContents() {

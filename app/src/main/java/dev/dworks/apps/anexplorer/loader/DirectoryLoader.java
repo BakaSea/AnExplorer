@@ -53,6 +53,7 @@ import dev.dworks.apps.anexplorer.provider.RecentsProvider.StateColumns;
 import static dev.dworks.apps.anexplorer.BaseActivity.State.SORT_ORDER_DISPLAY_NAME;
 import static dev.dworks.apps.anexplorer.BaseActivity.State.SORT_ORDER_LAST_MODIFIED;
 import static dev.dworks.apps.anexplorer.BaseActivity.State.SORT_ORDER_SIZE;
+import static dev.dworks.apps.anexplorer.BaseActivity.State.SORT_ORDER_TYPE;
 import static dev.dworks.apps.anexplorer.BaseActivity.TAG;
 import static dev.dworks.apps.anexplorer.model.DocumentInfo.getCursorInt;
 
@@ -260,6 +261,8 @@ public class DirectoryLoader extends AsyncTaskLoader<DirectoryResult> {
                 return Document.COLUMN_LAST_MODIFIED + " DESC";
             case SORT_ORDER_SIZE:
                 return Document.COLUMN_SIZE + " DESC";
+            case SORT_ORDER_TYPE:
+                return Document.COLUMN_MIME_TYPE + " ASC";
             default:
                 return null;
         }

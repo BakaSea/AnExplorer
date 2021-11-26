@@ -909,6 +909,12 @@ public class DocumentsActivity extends BaseActivity implements MenuItem.OnMenuIt
             params.putString("type", "size");
             AnalyticsManager.logEvent("sort_size", params);
             return true;
+        } else if (id == R.id.menu_sort_type) {
+            setUserSortOrder(State.SORT_ORDER_TYPE);
+            Bundle params = new Bundle();
+            params.putString("type", "type");
+            AnalyticsManager.logEvent("sort_type", params);
+            return true;
         } else if (id == R.id.menu_grid) {
             setUserMode(State.MODE_GRID);
             Bundle params = new Bundle();

@@ -61,6 +61,8 @@
     <!-- Mode that sorts documents by their file size in descending order; largest first [CHAR LIMIT=24] -->
     <string name="sort_size">By size</string>
 
+    <string name="sort_type">By type</string>
+
     <!-- Accessibility title to open the drawer showing all roots where documents can be stored [CHAR LIMIT=32] -->
     <string name="drawer_open">Show roots</string>
     <!-- Accessibility title to close the drawer showing all roots where documents can be stored [CHAR LIMIT=32] -->

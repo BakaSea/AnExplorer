@@ -27,6 +27,7 @@ import dev.dworks.apps.anexplorer.model.DocumentsContract.Document;
 import static dev.dworks.apps.anexplorer.BaseActivity.State.SORT_ORDER_DISPLAY_NAME;
 import static dev.dworks.apps.anexplorer.BaseActivity.State.SORT_ORDER_LAST_MODIFIED;
 import static dev.dworks.apps.anexplorer.BaseActivity.State.SORT_ORDER_SIZE;
+import static dev.dworks.apps.anexplorer.BaseActivity.State.SORT_ORDER_TYPE;
 import static dev.dworks.apps.anexplorer.model.DocumentInfo.getCursorLong;
 import static dev.dworks.apps.anexplorer.model.DocumentInfo.getCursorString;
 
@@ -49,6 +50,7 @@ public class SortingCursorWrapper extends AbstractCursor {
         mPosition = new int[count];
         switch (sortOrder) {
             case SORT_ORDER_DISPLAY_NAME:
+            case SORT_ORDER_TYPE:
                 mValueString = new String[count];
                 mValueLong = null;
                 break;
@@ -83,6 +85,9 @@ public class SortingCursorWrapper extends AbstractCursor {
                 case SORT_ORDER_SIZE:
                     mValueLong[i] = getCursorLong(cursor, Document.COLUMN_SIZE);
                     break;
+                case SORT_ORDER_TYPE:
+                    mValueString[i] = getCursorString(cursor, Document.COLUMN_MIME_TYPE);
+                    break;
             }
         }
 
@@ -96,6 +101,9 @@ public class SortingCursorWrapper extends AbstractCursor {
             case SORT_ORDER_LAST_MODIFIED:
             case SORT_ORDER_SIZE:
                 binarySort(mPosition, mValueLong);
+                break;
+            case SORT_ORDER_TYPE:
+                binarySort(mPosition, mValueString);
                 break;
         }
     }
