@@ -31,7 +31,6 @@
     <uses-feature
         android:name="android.hardware.wifi"
         android:required="false" />
-
     <uses-feature
         android:name="android.hardware.type.pc"
         android:required="false" />
@@ -41,26 +40,32 @@
         android:allowBackup="true"
         android:banner="@drawable/banner"
         android:icon="@drawable/ic_launcher"
-        android:roundIcon="@drawable/ic_launcher"
         android:label="@string/name"
-        tools:replace="android:label"
+        android:roundIcon="@drawable/ic_launcher"
+        android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:supportsRtl="true">
-
-        <meta-data android:name="WindowManagerPreference:FreeformWindowSize"
-            android:value="[phone|tablet|maximize]" />
-        <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation"
-            android:value="[portrait|landscape]" />
+        tools:replace="android:label">
+        <activity
+            android:name=".HelloActivity"
+            android:parentActivityName=".DocumentsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DocumentsActivity"/>
+        </activity>
 
         <meta-data
+            android:name="WindowManagerPreference:FreeformWindowSize"
+            android:value="[phone|tablet|maximize]" />
+        <meta-data
+            android:name="WindowManagerPreference:FreeformWindowOrientation"
+            android:value="[portrait|landscape]" />
+        <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
-            android:value="dev.dworks.apps.anexplorer.cast.CastOptionsProvider" />
-
-        <!-- TODO: allow rotation when state saving is in better shape -->
+            android:value="dev.dworks.apps.anexplorer.cast.CastOptionsProvider" /> <!-- TODO: allow rotation when state saving is in better shape -->
         <activity
             android:name=".DocumentsActivity"
-            android:theme="@style/DocumentsTheme.Splash"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/DocumentsTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.OPEN_DOCUMENT" />
 
@@ -116,40 +121,46 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
             </intent-filter>
+
             <meta-data
                 android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
                 android:resource="@xml/device_filter" />
 
             <intent-filter>
                 <data android:scheme="${applicationId}" />
+
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
 
-            <meta-data android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
+            <meta-data
+                android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
                 android:value="true" />
         </activity>
         <activity
             android:name=".StandaloneActivity"
-            android:theme="@style/DocumentsTheme.Document" >
-            <meta-data android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
+            android:theme="@style/DocumentsTheme.Document">
+            <meta-data
+                android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
                 android:value="true" />
         </activity>
         <activity
             android:name=".setting.SettingsActivity"
             android:exported="false"
             android:label="@string/menu_settings"
-            android:theme="@style/DocumentsTheme.Setting" >
-            <meta-data android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
+            android:theme="@style/DocumentsTheme.Setting">
+            <meta-data
+                android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
                 android:value="true" />
         </activity>
         <activity
             android:name=".AboutActivity"
             android:label="About"
-            android:theme="@style/DocumentsTheme.Document" >
-            <meta-data android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
+            android:theme="@style/DocumentsTheme.Document">
+            <meta-data
+                android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
                 android:value="true" />
         </activity>
 
@@ -178,7 +189,8 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="sensor"
             android:theme="@style/DocumentsTheme.Note">
-            <intent-filter android:label="Text Viewer"
+            <intent-filter
+                android:label="Text Viewer"
                 tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -186,7 +198,9 @@
 
                 <data android:mimeType="text/*" />
             </intent-filter>
-            <meta-data android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
+
+            <meta-data
+                android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
                 android:value="true" />
         </activity>
 
@@ -217,7 +231,6 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-
         <service
             android:name=".service.TransferTileService"
             android:icon="@drawable/ic_root_transfer"
@@ -229,13 +242,12 @@
         </service>
 
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.ContentProvider"
+            android:name=".provider.ContentProvider"
             android:authorities="${applicationId}.roots"
-            android:exported="false"
-            android:enabled="true"/>
-
+            android:enabled="true"
+            android:exported="false" />
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.RecentsProvider"
+            android:name=".provider.RecentsProvider"
             android:authorities="${applicationId}.recents"
             android:exported="true"
             android:grantUriPermissions="true"
@@ -245,7 +257,7 @@
             </intent-filter>
         </provider>
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.ExternalStorageProvider"
+            android:name=".provider.ExternalStorageProvider"
             android:authorities="${applicationId}.externalstorage.documents"
             android:exported="true"
             android:grantUriPermissions="true"
@@ -255,7 +267,7 @@
             </intent-filter>
         </provider>
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.MediaDocumentsProvider"
+            android:name=".provider.MediaDocumentsProvider"
             android:authorities="${applicationId}.media.documents"
             android:exported="true"
             android:grantUriPermissions="true"
@@ -265,7 +277,7 @@
             </intent-filter>
         </provider>
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.NonMediaDocumentsProvider"
+            android:name=".provider.NonMediaDocumentsProvider"
             android:authorities="${applicationId}.nonmedia.documents"
             android:exported="true"
             android:grantUriPermissions="true"
@@ -275,7 +287,7 @@
             </intent-filter>
         </provider>
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.AppsProvider"
+            android:name=".provider.AppsProvider"
             android:authorities="${applicationId}.apps.documents"
             android:exported="true"
             android:grantUriPermissions="true"
@@ -285,7 +297,7 @@
             </intent-filter>
         </provider>
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.RootedStorageProvider"
+            android:name=".provider.RootedStorageProvider"
             android:authorities="${applicationId}.rootedstorage.documents"
             android:exported="true"
             android:grantUriPermissions="true"
@@ -294,12 +306,11 @@
                 <action android:name="dev.dworks.apps.anexplorer.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
-
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.HeatMapProvider"
+            android:name=".provider.HeatMapProvider"
             android:authorities="${applicationId}.heatmap.documents"
-            android:exported="false"
             android:enabled="false"
+            android:exported="false"
             android:grantUriPermissions="true"
             android:permission="android.permission.MANAGE_DOCUMENT">
             <intent-filter>
@@ -307,58 +318,53 @@
             </intent-filter>
         </provider>
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.DownloadStorageProvider"
+            android:name=".provider.DownloadStorageProvider"
             android:authorities="${applicationId}.downloads.documents"
-            android:exported="false"
             android:enabled="false"
+            android:exported="false"
             android:grantUriPermissions="true"
             android:permission="android.permission.MANAGE_DOCUMENT">
             <intent-filter>
                 <action android:name="dev.dworks.apps.anexplorer.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
-
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.ExplorerProvider"
+            android:name=".provider.ExplorerProvider"
             android:authorities="${applicationId}.explorer"
             android:enabled="true"
             android:exported="false" />
-
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.UsbStorageProvider"
+            android:name=".provider.UsbStorageProvider"
             android:authorities="${applicationId}.usbstorage.documents"
             android:exported="true"
             android:grantUriPermissions="true"
-            android:permission="android.permission.MANAGE_DOCUMENT" >
+            android:permission="android.permission.MANAGE_DOCUMENT">
             <intent-filter>
                 <action android:name="dev.dworks.apps.anexplorer.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
-
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.NetworkStorageProvider"
+            android:name=".provider.NetworkStorageProvider"
             android:authorities="${applicationId}.networkstorage.documents"
             android:exported="true"
             android:grantUriPermissions="true"
-            android:permission="android.permission.MANAGE_DOCUMENT" >
+            android:permission="android.permission.MANAGE_DOCUMENT">
             <intent-filter>
                 <action android:name="dev.dworks.apps.anexplorer.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
-
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.CloudStorageProvider"
+            android:name=".provider.CloudStorageProvider"
             android:authorities="${applicationId}.cloudstorage.documents"
             android:exported="true"
             android:grantUriPermissions="true"
-            android:permission="android.permission.MANAGE_DOCUMENT" >
+            android:permission="android.permission.MANAGE_DOCUMENT">
             <intent-filter>
                 <action android:name="dev.dworks.apps.anexplorer.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
-
         <provider
-            android:name="dev.dworks.apps.anexplorer.provider.ExtraDocumentsProvider"
+            android:name=".provider.ExtraDocumentsProvider"
             android:authorities="${applicationId}.extra.documents"
             android:exported="true"
             android:grantUriPermissions="true"
@@ -367,48 +373,51 @@
                 <action android:name="dev.dworks.apps.anexplorer.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
+
         <activity
             android:name=".common.WebviewActivity"
-            android:theme="@style/DocumentsTheme.Document"
-            android:exported="true"
             android:enabled="true"
-            android:label="@string/app_name">
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/DocumentsTheme.Document">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="https"
-                    android:host="integrations.cloudrail.com" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="integrations.cloudrail.com"
+                    android:scheme="https" />
             </intent-filter>
-            <meta-data android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
+
+            <meta-data
+                android:name="WindowManagerPreference:SuppressWindowControlNavigationButton"
                 android:value="true" />
         </activity>
-
         <activity
             android:name=".cast.ExpandedControlsActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/DocumentsTheme.Cast" />
-
         <activity
             android:name=".ShareDeviceActivity"
             android:label="@string/activity_share"
             android:theme="@style/DocumentsTheme.Note">
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:mimeType="*/*"/>
+                <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
 
         <service
             android:name=".service.TransferService"
             android:enabled="true"
-            android:exported="false"/>
-
+            android:exported="false" />
     </application>
 
 </manifest>

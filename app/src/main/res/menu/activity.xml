@@ -99,5 +99,10 @@
         support:showAsAction="never"
         android:orderInCategory="102"
         android:title="Exit"/>
+    <item
+        android:id="@+id/menu_hello"
+        support:showAsAction="never"
+        android:orderInCategory="103"
+        android:title="Hello"/>
 
 </menu>
