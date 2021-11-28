@@ -90,6 +90,7 @@ import dev.dworks.apps.anexplorer.fragment.ConnectionsFragment;
 import dev.dworks.apps.anexplorer.fragment.CreateDirectoryFragment;
 import dev.dworks.apps.anexplorer.fragment.CreateFileFragment;
 import dev.dworks.apps.anexplorer.fragment.DirectoryFragment;
+import dev.dworks.apps.anexplorer.fragment.HelloFragment;
 import dev.dworks.apps.anexplorer.fragment.HomeFragment;
 import dev.dworks.apps.anexplorer.fragment.MoveFragment;
 import dev.dworks.apps.anexplorer.fragment.PickFragment;
@@ -937,6 +938,9 @@ public class DocumentsActivity extends BaseActivity implements MenuItem.OnMenuIt
         }  else if (id == R.id.menu_support) {
             openPurchaseActivity(this);
             AnalyticsManager.logEvent("support_open");
+            return true;
+        } else if (id == R.id.menu_hello) {
+            HelloFragment.show(getSupportFragmentManager());
             return true;
         }
         return false;
